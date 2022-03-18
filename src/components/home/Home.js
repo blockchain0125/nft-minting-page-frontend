@@ -33,14 +33,14 @@ const Home = () => {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const signer = provider.getSigner();
 		const mint = new ethers.Contract(config.mint.contract, config.mint.abi, signer);
-		const mintTx = await mint.mint(amount);
+		const mintTx = await mint.mint(amount * 0.15);
 		await mintTx.wait();
 	};
 
 	return (
 		<div className="home">
 			<div className="home-container">
-				<div className="home-div home-title">SHIBABETS LIVE MINT</div>
+				<div className="home-div home-title">SHIBA PRE-SALE MINT</div>
 				<div className="home-div home-subtitle">Wednesday, March 16, 2022</div>
 				<div className="home-attributes">
 					<div className="home-div home-attribute">Supply</div>
@@ -58,7 +58,7 @@ const Home = () => {
 						<img src={Nft} alt="nft" className="nft" />
 						<div className="price-info">
 							<div className="price-title">Price Per NFT in ETH</div>
-							<div className="price">0.2 Ξ Each</div>
+							<div className="price">0.15 Ξ Each</div>
 						</div>
 					</div>
 					<div className="amount-block">
@@ -106,7 +106,7 @@ const Home = () => {
 					</div>
 					<div className="total-block">
 						<div className="total">TOTAL</div>
-						<div className="total">{(amount * 0.2).toFixed(2)} Ξ</div>
+						<div className="total">{(amount * 0.15).toFixed(2)} Ξ</div>
 					</div>
 					<div className="flex-center">
 						<div
