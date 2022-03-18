@@ -1,9 +1,41 @@
 import { useState } from "react";
+import { ethers } from "ethers";
+import config from "../../config";
 import Nft from "../../assets/images/nft.gif";
 import "./home.scss";
 
 const Home = () => {
-	const [amount, setAmount] = useState(0);
+	// const [address, setAddress] = useState("");
+	const [amount, setAmount] = useState(1);
+
+	const handleConnect = async () => {
+		const { ethereum } = window;
+		if (ethereum) {
+			window.ethereum.enable();
+			const chainId = await window.ethereum.request({ method: "eth_chainId" });
+			if (chainId == 4) {
+				ethereum.request({ method: "eth_requestAccounts" }).then((accs) => {
+					if (accs && accs.length) {
+						mint();
+						// setAddress(accs[0]);
+						// window.sessionStorage.setItem("connect", "1");
+					}
+				});
+			} else {
+				alert("please select rinkeby network !!!");
+			}
+		} else {
+			alert("🦊 first, install metamask");
+		}
+	};
+
+	const mint = async () => {
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner();
+		const mint = new ethers.Contract(config.mint.contract, config.mint.abi, signer);
+		const mintTx = await mint.mint(amount);
+		await mintTx.wait();
+	};
 
 	return (
 		<div className="home">
@@ -38,7 +70,7 @@ const Home = () => {
 								xmlns="http://www.w3.org/2000/svg"
 								className="symbol"
 								onClick={() => {
-									if (amount >= 1) setAmount(amount - 1);
+									if (amount > 1) setAmount(amount - 1);
 								}}
 							>
 								<path
@@ -77,7 +109,14 @@ const Home = () => {
 						<div className="total">{(amount * 0.2).toFixed(2)} Ξ</div>
 					</div>
 					<div className="flex-center">
-						<div className="mintbtn">MINT</div>
+						<div
+							className="mintbtn"
+							onClick={() => {
+								handleConnect();
+							}}
+						>
+							MINT
+						</div>
 					</div>
 					<div className="flex-center">
 						<div className="result">7775/7777</div>
