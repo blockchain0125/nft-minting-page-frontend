@@ -37,11 +37,23 @@ const Home = () => {
 		await mintTx.wait();
 	};
 
+	const d = new Date();
+
+	const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+	let day = days[d.getDay()];
+	let month = months[d.getMonth()];
+
+	let mintAmount = (2000 + (d.getTime() - 1647634247705) / 15000).toFixed(0);
+
 	return (
 		<div className="home">
 			<div className="home-container">
-				<div className="home-div home-title">SHIBA PRE-SALE MINT</div>
-				<div className="home-div home-subtitle">Wednesday, March 16, 2022</div>
+				<div className="home-div home-title">SHIBABETS PRE-SALE MINT</div>
+				<div className="home-div home-subtitle">
+					{day}, {month} {d.getDate()}, {d.getFullYear()}
+				</div>
 				<div className="home-attributes">
 					<div className="home-div home-attribute">Supply</div>
 					<div className="home-div home-attribute">Price</div>
@@ -49,7 +61,7 @@ const Home = () => {
 				</div>
 				<div className="home-attributes">
 					<div className="home-div home-attribute">7777</div>
-					<div className="home-div home-attribute">0.2 Ξ</div>
+					<div className="home-div home-attribute">0.15 Ξ</div>
 					<div className="home-div home-attribute">5 per Wallet</div>
 				</div>
 				<div className="home-box">
@@ -119,7 +131,7 @@ const Home = () => {
 						</div>
 					</div>
 					<div className="flex-center">
-						<div className="result">7775/7777</div>
+						<div className="result">{mintAmount < 6593 ? mintAmount : 6593}/7777</div>
 					</div>
 				</div>
 			</div>
