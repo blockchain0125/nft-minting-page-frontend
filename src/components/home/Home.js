@@ -45,7 +45,7 @@ const Home = () => {
 	let day = days[d.getDay()];
 	let month = months[d.getMonth()];
 
-	let mintAmount = (2000 + (d.getTime() - 1647634247705) / 15000).toFixed(0);
+	let mintAmount = (6000 + (d.getTime() - 1647630613905) / 15000).toFixed(0);
 
 	return (
 		<div className="home">
@@ -131,7 +131,7 @@ const Home = () => {
 						</div>
 					</div>
 					<div className="flex-center">
-						<div className="result">{mintAmount < 6593 ? mintAmount : 6593}/7777</div>
+						<div className="result">{mintAmount < 7553 ? mintAmount : 7553}/7777</div>
 					</div>
 				</div>
 			</div>
